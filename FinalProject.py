@@ -5,11 +5,16 @@
 #              Weapons can kills specific enemies, upon selecting the right weapon , the user kills the enemy,
 #              and by killing the enemy the user receives points.
 
-
 # Levels
 #   Level 1 -> 0-10 points
 #   Level 2 -> 10-20
-#   level 3 -> 30-40
+#   level 3 -> 20-30
+userPoints = 0
+levelOne = range(0,10)
+levelTwo = range(10,20)
+levelThree = range(20,30)
+
+print("You have {} Points".format(userPoints))
 
 # Class for Weapons
 #   Stick 
@@ -39,7 +44,6 @@
 #       Points 10-20 -> Sword
 #       Points 20-30 -> Crossbow
 # Input for Selection
-
 
 # Display Enemies
 #   Snake
