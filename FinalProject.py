@@ -1,4 +1,7 @@
-# This is your Final Project file, where your code for the project will go.
-# Make sure to regularly commit your work to Git and push the changes to GitHub.
-# 
-# I hope you have fun while working on creating your game!
+# Game Name: Medievel Dungeon
+# Author: Kifayat Ullah Khan
+# Created: Dec 07 2021
+# Description: The user is provided with weapons Stick, Crossbow and Sword and has to kill an enemy, Snake, Hyena, and Bear. 
+#              Weapons can kills specific enemies, upon selecting the right weapon , the user kills the enemy,
+#              and by killing the enemy the user receives points.
+
