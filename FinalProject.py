@@ -47,6 +47,19 @@ crossbow = Weapons("Crossbow", 3, 8)
 #   Bear 
 #       Killed by Crossbow
 #       Points -> 10
+class Enemies:
+    points = 10
+
+    def __init__(self, name, weapon1, weapon2):
+        self.name = name
+        self.weapon1 = weapon1
+        self.weapon2 = weapon2
+
+snake = Enemies("Snake", "Stick", False)
+hyena = Enemies("Hyena", "Sword", "Crossbow")
+hyena = Enemies("Bear", "Crossbow", False)
+
+
 
 # Display Weapons Available
 #   If Points
