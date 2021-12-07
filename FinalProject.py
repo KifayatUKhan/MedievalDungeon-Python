@@ -5,14 +5,17 @@
 #              Weapons can kills specific enemies, upon selecting the right weapon , the user kills the enemy,
 #              and by killing the enemy the user receives points.
 
+userAssets = []
 # Levels
 #   Level 1 -> 0-10 points
 #   Level 2 -> 10-20
 #   level 3 -> 20-30
 userPoints = 0
-levelOne = range(0,10)
-levelTwo = range(10,20)
-levelThree = range(20,30)
+levelDict = {
+    1 : {"Level" : 1, "Range" : range(0,10)},
+    2 : {"Level" : 2, "Range" : range(10,20)},
+    3 : {"Level" : 3, "Range" : range(20,30)},
+}
 
 print("You have {} Points".format(userPoints))
 
@@ -53,34 +56,10 @@ enemyDict = {
 #       Points 0-10 -> Stick
 #       Points 10-20 -> Sword
 #       Points 20-30 -> Crossbow
-if userPoints in levelOne:
-    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(stick.name, stick.level, stick.strenght))
-elif userPoints in levelTwo:
-    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(stick.name, stick.level, stick.strenght))
-    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(sword.name, sword.level, sword.strenght))
-elif userPoints in levelThree:
-    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(stick.name, stick.level, stick.strenght))
-    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(sword.name, sword.level, sword.strenght))
-    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(crossbow.name, crossbow.level, crossbow.strenght))
-else:
-    print(" You have WON the Game. No More Playing")
-
-# Input for Weapon Selection
-while True:
-    weaponSelect = int(input("Enter Weapon#: "))
-
-    if weaponSelect == 1:
-        userWeapon = stick
-        break
-    elif weaponSelect == 2:
-        userWeapon = sword
-        break
-    elif weaponSelect == 3:
-        userWeapon = crossbow
-        break
-    else:
-        print("Wrong Input - Enter again")
-        continue
+for level in weaponDict:
+    if userPoints in levelDict[level]["Range"]:
+        print("Weapon available: {}".format(weaponDict[level]["Weapon"]))
+        userAssets = weaponDict[level]["Weapon"]
 
 
 # Display Enemies
@@ -88,8 +67,16 @@ while True:
 #   Hyena
 #   Bear
 # Select an Enemy
-for enemies in Enemies:
+for enemy in enemyDict:
+    print("{} : {}".format(enemy, enemyDict[enemy]["Enemy"]))
 
+while True:
+    userInput = int(input("Choose Enemy [1-3]: "))
+    if userInput in enemyDict:
+        userAssets = enemyDict[userInput]["Enemy"]
+        break
+
+print(userAssets)
 
 # Conditional Statments
 #   If weapon matches -> kill -> get points
