@@ -59,14 +59,24 @@ snake = Enemies("Snake", "Stick", False)
 hyena = Enemies("Hyena", "Sword", "Crossbow")
 hyena = Enemies("Bear", "Crossbow", False)
 
-
-
 # Display Weapons Available
 #   If Points
 #       Points 0-10 -> Stick
 #       Points 10-20 -> Sword
 #       Points 20-30 -> Crossbow
 # Input for Selection
+if userPoints in levelOne:
+    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(stick.name, stick.level, stick.strenght))
+elif userPoints in levelTwo:
+    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(stick.name, stick.level, stick.strenght))
+    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(sword.name, sword.level, sword.strenght))
+elif userPoints in levelThree:
+    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(stick.name, stick.level, stick.strenght))
+    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(sword.name, sword.level, sword.strenght))
+    print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(crossbow.name, crossbow.level, crossbow.strenght))
+else:
+    print(" You have WON the Game. No More Playing")
+
 
 # Display Enemies
 #   Snake
