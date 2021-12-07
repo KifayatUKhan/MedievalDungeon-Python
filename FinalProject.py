@@ -64,7 +64,6 @@ hyena = Enemies("Bear", "Crossbow", False)
 #       Points 0-10 -> Stick
 #       Points 10-20 -> Sword
 #       Points 20-30 -> Crossbow
-# Input for Selection
 if userPoints in levelOne:
     print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(stick.name, stick.level, stick.strenght))
 elif userPoints in levelTwo:
@@ -76,6 +75,24 @@ elif userPoints in levelThree:
     print("Weapon: {}\nLevel: {}\nStrenght: {} ".format(crossbow.name, crossbow.level, crossbow.strenght))
 else:
     print(" You have WON the Game. No More Playing")
+
+# Input for Weapon Selection
+while True:
+    weaponSelect = int(input("Enter Weapon#: "))
+
+    if weaponSelect == 1:
+        userWeapon = stick
+        break
+    elif weaponSelect == 2:
+        userWeapon = sword
+        break
+    elif weaponSelect == 3:
+        userWeapon = crossbow
+        break
+    else:
+        print("Wrong Input - Enter again")
+        continue
+
 
 
 # Display Enemies
