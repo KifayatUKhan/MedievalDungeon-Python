@@ -4,13 +4,21 @@
 # Description: The user is provided with weapons Stick, Crossbow and Sword and has to kill an enemy, Snake, Hyena, and Bear. 
 #              Weapons can kills specific enemies, upon selecting the right weapon , the user kills the enemy,
 #              and by killing the enemy the user receives points.
+fileDir = r"D:\College\Programming\Final Project\UserPoints.txt"
+try:
+    with open(fileDir, "r") as pointFile:
+        userPoints = int(pointFile.read())
+except FileNotFoundError:
+    print("Points file not found - Points will be reset")
+    userPoints = 0
+
 
 userAssets = {"Weapon" : "", "Enemy" : "", "Level" : "", "ELevel" : "",}
 # Levels
 #   Level 1 -> 0-10 points
 #   Level 2 -> 10-20
 #   level 3 -> 20-30
-userPoints = 0
+
 levelDict = {
     1 : {"Level" : 1, "Range" : range(0,10)},
     2 : {"Level" : 2, "Range" : range(10,20)},
@@ -19,7 +27,7 @@ levelDict = {
 for x in levelDict:
     if userPoints in levelDict[x]["Range"]:
         userAssets["Level"] = levelDict[x]["Level"]
-
+print(userAssets["Level"])
 print("You have {} Points".format(userPoints))
 
 # Dict for Weapons
@@ -89,7 +97,13 @@ while True:
 # Store the points in an external file
 
 if userAssets["Level"] == userAssets["ELevel"]:
-    userPoints = 10
+    userPoints += 10
     print("Congrats! Your level of weapon matched the enemy level")
 else:
     print("Sorry you LOST")
+
+with open(fileDir, "w") as pointFile:
+    pointFile.write(str(userPoints))
+
+if userPoints == 30:
+    print("You have reached the point. Delet the points file to reset")
