@@ -16,7 +16,7 @@ levelThree = range(20,30)
 
 print("You have {} Points".format(userPoints))
 
-# Class for Weapons
+# Dict for Weapons
 #   Stick 
 #       Level 1
 #       strenght -> 2
@@ -26,18 +26,13 @@ print("You have {} Points".format(userPoints))
 #   Crossbow 
 #       Level 3
 #       strenght -> 8
-class Weapons:
+weaponDict = {
+    1 : {"Weapon" : "Stick", "Level" : 1, "Strenght" : 2},
+    2 : {"Weapon" : "Sword", "Level" : 2, "Strenght" : 6},
+    3 : {"Weapon" : "Crossbow", "Level" : 3, "Strenght" : 8}
+}
 
-    def __init__(self, name, level, strenght):
-        self.name = name
-        self.level = level
-        self.strenght = strenght
-
-stick = Weapons("Stick", 1, 2)
-sword = Weapons("Sword", 2, 6)
-crossbow = Weapons("Crossbow", 3, 8)
-
-# Class for Enemies
+# Dict for Enemies
 #   Snake 
 #       Killed by Stick, Sword
 #       Points -> 10
@@ -47,17 +42,11 @@ crossbow = Weapons("Crossbow", 3, 8)
 #   Bear 
 #       Killed by Crossbow
 #       Points -> 10
-class Enemies:
-    points = 10
-
-    def __init__(self, name, weapon1, weapon2):
-        self.name = name
-        self.weapon1 = weapon1
-        self.weapon2 = weapon2
-
-snake = Enemies("Snake", "Stick", False)
-hyena = Enemies("Hyena", "Sword", "Crossbow")
-hyena = Enemies("Bear", "Crossbow", False)
+enemyDict = {
+    1 : {"Enemy" : "Snake", "DestroyedBy" : "Stick"},
+    2 : {"Enemy" : "Hyena", "DestroyedBy" : "Sword"},
+    3 : {"Enemy" : "Bear", "DestroyedBy" : "Crossbow"},
+}
 
 # Display Weapons Available
 #   If Points
@@ -94,12 +83,13 @@ while True:
         continue
 
 
-
 # Display Enemies
 #   Snake
 #   Hyena
 #   Bear
 # Select an Enemy
+for enemies in Enemies:
+
 
 # Conditional Statments
 #   If weapon matches -> kill -> get points
