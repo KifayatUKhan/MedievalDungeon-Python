@@ -26,6 +26,16 @@ print("You have {} Points".format(userPoints))
 #   Crossbow 
 #       Level 3
 #       strenght -> 8
+class Weapons:
+
+    def __init__(self, name, level, strenght):
+        self.name = name
+        self.level = level
+        self.strenght = strenght
+
+stick = Weapons("Stick", 1, 2)
+sword = Weapons("Sword", 2, 6)
+crossbow = Weapons("Crossbow", 3, 8)
 
 # Class for Enemies
 #   Snake 
