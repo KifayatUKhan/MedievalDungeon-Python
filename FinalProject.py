@@ -5,7 +5,7 @@
 #              Weapons can kills specific enemies, upon selecting the right weapon , the user kills the enemy,
 #              and by killing the enemy the user receives points.
 
-userAssets = []
+userAssets = {"Weapon" : "", "Enemy" : "", "Level" : "", "ELevel" : "",}
 # Levels
 #   Level 1 -> 0-10 points
 #   Level 2 -> 10-20
@@ -16,6 +16,9 @@ levelDict = {
     2 : {"Level" : 2, "Range" : range(10,20)},
     3 : {"Level" : 3, "Range" : range(20,30)},
 }
+for x in levelDict:
+    if userPoints in levelDict[x]["Range"]:
+        userAssets["Level"] = levelDict[x]["Level"]
 
 print("You have {} Points".format(userPoints))
 
@@ -46,9 +49,9 @@ weaponDict = {
 #       Killed by Crossbow
 #       Points -> 10
 enemyDict = {
-    1 : {"Enemy" : "Snake", "DestroyedBy" : "Stick"},
-    2 : {"Enemy" : "Hyena", "DestroyedBy" : "Sword"},
-    3 : {"Enemy" : "Bear", "DestroyedBy" : "Crossbow"},
+    1 : {"Enemy" : "Snake", "DestroyedBy" : "Stick", "Level" : 1},
+    2 : {"Enemy" : "Hyena", "DestroyedBy" : "Sword", "Level" : 2},
+    3 : {"Enemy" : "Bear", "DestroyedBy" : "Crossbow", "Level" : 3},
 }
 
 # Display Weapons Available
@@ -59,7 +62,8 @@ enemyDict = {
 for level in weaponDict:
     if userPoints in levelDict[level]["Range"]:
         print("Weapon available: {}".format(weaponDict[level]["Weapon"]))
-        userAssets = weaponDict[level]["Weapon"]
+        userAssets["Weapon"] = weaponDict[level]["Weapon"]
+        userAssets["Level"] = levelDict[level]["Level"]
 
 
 # Display Enemies
@@ -73,12 +77,19 @@ for enemy in enemyDict:
 while True:
     userInput = int(input("Choose Enemy [1-3]: "))
     if userInput in enemyDict:
-        userAssets = enemyDict[userInput]["Enemy"]
+        userAssets["Enemy"] = enemyDict[userInput]["Enemy"]
+        userAssets["ELevel"] = enemyDict[userInput]["Level"]
         break
-
-print(userAssets)
+    else: 
+        continue
 
 # Conditional Statments
 #   If weapon matches -> kill -> get points
 #   else -> fail -> no points
 # Store the points in an external file
+
+if userAssets["Level"] == userAssets["ELevel"]:
+    userPoints = 10
+    print("Congrats! Your level of weapon matched the enemy level")
+else:
+    print("Sorry you LOST")
