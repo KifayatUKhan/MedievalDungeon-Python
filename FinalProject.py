@@ -28,7 +28,7 @@ def onlyInt(ask):
     while True:
         try: 
             inputVar = int(input(ask))
-            if not inputVar in range(1,4):
+            if not inputVar in range(1,5):
                 raise Exception
             break
         except ValueError:
@@ -60,15 +60,18 @@ print("You have {} Points".format(userAttributes["Points"]))
 # Dict for Weapons
 weaponDict = {
     1 : {"Weapon" : "Stick", "Level" : 0, "Strenght" : 2},
-    2 : {"Weapon" : "Sword", "Level" : 1, "Strenght" : 6},
-    3 : {"Weapon" : "Crossbow", "Level" : 2, "Strenght" : 8}
+    2 : {"Weapon" : "Spearhead", "Level" : 1, "Strenght" : 6},
+    3 : {"Weapon" : "Sword", "Level" : 2, "Strenght" : 8}
 }
 
 # Dict for Enemies
 enemyDict = {
-    1 : {"Enemy" : "Snake", "DestroyedBy" : "Stick", "Level" : 0},
-    2 : {"Enemy" : "Hyena", "DestroyedBy" : "Sword", "Level" : 1},
-    3 : {"Enemy" : "Bear", "DestroyedBy" : "Crossbow", "Level" : 2},
+    1 : {"Enemy" : "Snake", "Weapon" : "Stick, Spearhead, Sword", "Level" : 0},
+    2 : {"Enemy" : "Hyena", "Weapon" : "Spearhead, Sword", "Level" : 1},
+    3 : {"Enemy" : "Bear", "Weapon" : "Spearhead", "Level" : 2},
+    4 : {"Enemy" : "Alligator", "Weapon" : "Spearhead, Sword", "Level" : 1},
+    5 : {"Enemy" : "Lion", "Weapon" : "Spearhead", "Level" : 2},
+    5 : {"Enemy" : "Scorpion", "Weapon" : "Stick, Spearhead, Sword", "Level" : 0},
 }
 
 # Display Weapons Available
@@ -82,45 +85,78 @@ for level in weaponDict:
 print("-"*15)
 print("\n")
 print("1: START GAME")
-print("2: INVENTORY")
-print("3: ABOUT")
+print("2: MY INVENTORY")
+print("3: CHEAT SHEET")
+print("4: ABOUT")
 print("\n")
 print("-"*15)
 
 # Menu options
 startGame = 1
-gameInventory = 2
-aboutGame = 3
-
+myInventory = 2
+gameInventory = 3
+aboutGame = 4
+uChance = 1
 # Selction Menu Option and the further actions
 while True:
     userOption = onlyInt(":> ")
-    
-    if userOption == startGame:
-        for enemy in enemyDict:
-            print("{} : {}".format(enemy, enemyDict[enemy]["Enemy"]))
 
-        while True:
-            userInput = int(input("Choose Enemy [1-3]: "))
-            if userInput in enemyDict:
-                userAttributes["Enemy"] = enemyDict[userInput]["Enemy"]
-                userAttributes["ELevel"] = enemyDict[userInput]["Level"]
-                break
-            else: 
-                continue
+    if userOption == startGame:
+        while uChance <= 3:
+            for enemy in enemyDict:
+                print("{} : {}".format(enemy, enemyDict[enemy]["Enemy"]))
+
+            while True:
+                userInput = int(input("Choose Enemy [1-3]: "))
+                if userInput in enemyDict:
+                    userAttributes["Enemy"] = enemyDict[userInput]["Enemy"]
+                    userAttributes["ELevel"] = enemyDict[userInput]["Level"]
+                    if userAttributes["WLevel"] >= userAttributes["ELevel"]:
+                        userAttributes["Points"] += 10
+                        print("Congrats! Your level of weapon matched the enemy level")
+                        break
+                    else:
+                        print("You DIED!")
+                        if uChance < 3:
+                            print("Don't Worry! You still have {} Chance(s)".format(3-uChance))
+                        uChance += 1
+                        print("Sorry you Died. You have chances though")
+                        continue
+                    
+                else: 
+                    continue
+                
+            break
+        break
+    
+
+    elif userOption == myInventory:
+        print("Level  Weapon")
+        for level in weaponDict:
+            if userAttributes["Level"] >= weaponDict[level]["Level"]:
+                print("{} {}".format(weaponDict[level]["Level"], weaponDict[level]["Weapon"]))
+                #print("WLEVEL", userAttributes["WLevel"], "ELEVEL", userAttributes["ELevel"])
+        print("\n")
+        print("-"*15)
+        print("[1] Start Game,  [2] My Inventory, [3] Cheat Sheet, [4] About")
+        print("-"*15)
+        continue
+
     elif userOption == gameInventory:
         print("-"*15)
         print("\n")
         print("YOUR LEVEL: {} ".format(userAttributes["Level"]))
-        print("{:<10s} {:<10s} {:<10s}".format("LEVEL", "WEAPON", "ENEMY"))
+        print("{:<10s} {:<10s} {:<10s}".format("ENEMY", "LEVEL", "WEAPON TO DEFEND BY"))
         for enemy in enemyDict:
-            print("{:<10} {:<10} {:<10}".format(enemyDict[enemy]["Level"], weaponDict[enemy]["Weapon"], enemyDict[enemy]["Enemy"]))
+
+            print("{:<10} {:<10} {:<10}".format( enemyDict[enemy]["Enemy"], enemyDict[enemy]["Level"], enemyDict[enemy]["Weapon"]))
         print("An upper level weapon can kill lower level enemies")
         print("\n")
         print("-"*15)
-        print("[1] Start Game,  [2] Inventory, [3] About")
+        print("[1] Start Game,  [2] My Inventory, [3] Cheat Sheet, [4] About")
         print("-"*15)
         continue
+
     elif userOption == aboutGame:
         print("-"*15)
         print("\n")
@@ -131,21 +167,21 @@ while True:
         print("or you get killed, if you don't select the right level enemy")
         print("\n")
         print("-"*15)
-        print("[1] Start Game,  [2] Inventory, [3] About")
+        print("[1] Start Game,  [2] My Inventory, [3] Cheat Sheet, [4] About")
         print("-"*15)
         
         continue
     else:
         print("WRONG INPUT")
+        print("\n")
+        print("-"*15)
+        print("[1] Start Game,  [2] My Inventory, [3] Cheat Sheet, [4] About")
+        print("-"*15)
             
     break
 
 # If User level matches or is greater than the enemy level, the user wins, otherwise lose.
-if userAttributes["WLevel"] >= userAttributes["ELevel"]:
-    userAttributes["Points"] += 10
-    print("Congrats! Your level of weapon matched the enemy level")
-else:
-    print("Sorry you LOST")
+
 
 # Write points to the user points file
 with open(fileDir, "w") as pointFile:
@@ -153,5 +189,5 @@ with open(fileDir, "w") as pointFile:
 
 # Reset the points, if reach the max. points.
 if userAttributes["Points"] == 30:
-    print("You have reached the point. Delete the points file to reset")
+    print("You have reached the Final. The points will be reseted now")
     os.remove(fileDir)
