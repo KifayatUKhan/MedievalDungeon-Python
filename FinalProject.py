@@ -53,7 +53,7 @@ def onlyInt(ask, range):
 # -----------------------------------------------------------------------------------------------
 def greetMenu(weapon, user):
     print("\n")
-    print("---------------------- WELCOME TO MEDIEVEL MAZE ------------------------")
+    print("---------------------- WELCOME TO MEDIEVEL DUNGEON ------------------------")
     print("TO WIN YOU HAVE TO GUESS THE CORRECT ENEMY BASED ON YOUR CURRENT WEAPON.")
     print("--------------------- SELECT 'ABOUT' FOR MORE INFO ---------------------")
     print("------------------- OR 'CHEAT SHEET' FOR ENEMY LEVELS ------------------")
